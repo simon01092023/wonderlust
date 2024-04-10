@@ -20,9 +20,21 @@
             </li>
           </ul>
           <ul class="right">
-            <li><a href="/about">About!!!!</a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url 'postcards_create' %}">Add a PostCard</a></li>
-            <li><a href="/postcards">View All My Postcards</a></li>
+
+            <li><a href="{% url 'index' %}">View All My PostCards</a></li>
+            <li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn">logout</button>
+              </form>
+            </li>
+            {% else %}
+            <li><a href="{% url 'login' %}">login</a></li>
+            <li><a href="{% url 'signup' %}">signup</a></li>
+            <li><a href="/about">About!</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>
