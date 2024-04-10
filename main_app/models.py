@@ -10,28 +10,28 @@ class Location(models.Model):
 
 
 
-class Journal(models.Model):
+class PostCard(models.Model):
     title = models.CharField(max_length=100)
     date = models.models.DateField(_(""), auto_now=False, auto_now_add=False)   
     content = models.TextField(max_length=250)
     locations = models.ManyToManyField(Location)
-    
-    # 1 user has many journey
+
+    # 1 user has many PostCards
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"cat_id": self.id})
+        return reverse("detail", kwargs={"PostCard_id": self.id})
     
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
-    Journal = models.ForeignKey(Journal, on_delete=models.CASCADE)
+    Journal = models.ForeignKey(PostCard, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"Photo for Journal_id: {self.Journal_id} @{self.url}"
+        return f"Photo for PostCard_id: {self.PostCard_id} @{self.url}"
 
 
 
