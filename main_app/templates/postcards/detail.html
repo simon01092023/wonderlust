@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>PostCard Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ postcard.title }}</span>
+    <p>Date: {{ postcard.date }}</p>
+    <p>Content: {{ postcard.content|linebreaks }}</p>
+    <p>Location: {{ postcard.locations|linebreaks }}</p>
+    <div class="card-action">
+        <a href="{% url 'postcards_update' postcard.id %}">Edit</a>
+        <a href="{% url 'postcards_delete' postcard.id %}">Delete</a>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

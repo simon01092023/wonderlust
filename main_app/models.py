@@ -9,7 +9,8 @@ class Location(models.Model):
     # longitude = models.FloatField(max_length=180)
     latitude = models.FloatField(validators=[MinValueValidator(-90),MaxValueValidator(90)])
     longitude = models.FloatField(validators=[MinValueValidator(-180),MaxValueValidator(180)])
-
+    def __str__(self):
+        return self.name
 
 
 
@@ -24,10 +25,10 @@ class PostCard(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.title
     
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"PostCard_id": self.id})
+        return reverse("detail", kwargs={"postcard_id": self.id})
     
 
 class Photo(models.Model):
