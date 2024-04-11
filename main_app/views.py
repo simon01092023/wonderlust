@@ -1,7 +1,12 @@
+
+import uuid
+import boto3
+import os
 from django.shortcuts import render, redirect
-from .models import PostCard
+from .models import PostCard, Location, Photo
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 
 # Login
 from django.contrib.auth import login
@@ -30,9 +35,31 @@ def signup(request):
 		'form': form
 	})
 
+def add_photo(request, postcard_id):
+    # photo-file will be the "name" attribute on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+          
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+           
+            Photo.objects.create(url=url, postcard_id=postcard_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+    return redirect('detail', postcard_id=postcard_id)
+
+
+
 class PostCardCreate(LoginRequiredMixin, CreateView):
   model = PostCard
-  fields = '__all__'
+  fields = ['title', 'date', 'content', 'locations']
 
 class PostCardUpdate(LoginRequiredMixin, UpdateView):
   model = PostCard
@@ -66,3 +93,19 @@ def postcards_index(request):
 def postcards_detail(request, postcard_id):
   postcard = PostCard.objects.get(id=postcard_id)
   return render(request, 'postcards/detail.html', { 'postcard': postcard })
+
+
+def assoc_location(request, postcard_id, location_id):
+  PostCard.objects.get(id=postcard_id).locations.add(location_id)
+  return redirect('detail', postcard_id=postcard_id)
+
+
+class LocationList(ListView):
+    model = Location
+
+class LocationDetail(DetailView):
+    model = Location
+
+class LocationCreate(CreateView):
+    model = Location
+    fields = '__all__'
