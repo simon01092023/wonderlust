@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Wonderlust</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
   </head>
   <body>
     <header class="navbar-fixed">
@@ -20,7 +21,13 @@
             </li>
           </ul>
           <ul class="right">
+
             {% if user.is_authenticated %}
+
+            <li><a href="/about">About!!!!</a></li>
+            <li><a href="{% url 'locations_create' %}">Add a Location</a></li>
+          <li><a href="{% url 'location_index' %}">View All Locations</a></li>
+
             <li><a href="{% url 'postcards_create' %}">Add a PostCard</a></li>
 
             <li><a href="{% url 'index' %}">View All My PostCards</a></li>

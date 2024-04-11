@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Location List</h1>
+
+<!-- you get two variables in the list page (index page) -->
+
+<!-- <model_name>_list 
+object_list -->
+
+<!-- toy_list 
+object_list -->
+
+{% for location in location_list %}
+  <a href="{% url 'locations_detail' location.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ location.name }}</span>
+            
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}
