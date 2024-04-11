@@ -5,10 +5,15 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Location(models.Model):
     name = models.CharField(max_length=100)
-    # latitude = models.FloatField(max_length=90)
-    # longitude = models.FloatField(max_length=180)
-    latitude = models.FloatField(validators=[MinValueValidator(-90),MaxValueValidator(90)])
-    longitude = models.FloatField(validators=[MinValueValidator(-180),MaxValueValidator(180)])
+    zipcode = models.CharField(max_length=200,blank=True, null=True)
+    city = models.CharField(max_length=200,blank=True, null=True)
+    country = models.CharField(max_length=200,blank=True, null=True)
+    address = models.CharField(max_length=200,blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)
+    edited_at = models.DateTimeField(auto_now=True)
+    
+    # latitude = models.FloatField(validators=[MinValueValidator(-90),MaxValueValidator(90)])
+    # longitude = models.FloatField(validators=[MinValueValidator(-180),MaxValueValidator(180)])
     def __str__(self):
         return self.name
 
@@ -19,7 +24,7 @@ class PostCard(models.Model):
     title = models.CharField(max_length=100,)
     date = models.DateField(("PostDate"), auto_now=False, auto_now_add=False)   
     content = models.TextField(max_length=250)
-    locations = models.ManyToManyField(Location)
+    locations = models.ManyToManyField(Location) 
 
     # 1 user has many PostCards
     user = models.ForeignKey(User, on_delete=models.CASCADE)
