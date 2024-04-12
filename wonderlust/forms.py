@@ -17,3 +17,4 @@ class MapForm(forms.ModelForm):
     class Meta:
         model = Map
         fields = ['address', 'geolocation']
+

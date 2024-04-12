@@ -19,3 +19,4 @@ urlpatterns = [
     path('locations/<int:pk>/', views.LocationDetail.as_view(), name='locations_detail'),
     path('accounts/signup/', views.signup, name='signup')
 
+]

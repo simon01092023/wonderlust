@@ -4,11 +4,6 @@ import boto3
 import os
 from django.shortcuts import render, redirect
 from .models import PostCard, Location, Photo
-<<<<<<< HEAD
-
-
-=======
->>>>>>> ca3f2dc42d91527fb5f467e69ed57fcbbe662a9d
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
