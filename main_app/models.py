@@ -15,6 +15,8 @@ class Location(models.Model):
     # longitude = models.FloatField(validators=[MinValueValidator(-180),MaxValueValidator(180)])
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse("locations_detail", kwargs={"pk": self.id})
 
 
 
