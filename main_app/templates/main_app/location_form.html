@@ -8,22 +8,6 @@
 
 <input id="autocomplete" placeholder="Enter a place" type="text" />
 
-<script>
-    let autocomplete;
-    function initAutocomplete(){
-        autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete'),
-            {
-                types:['establishment'],
-                componentRestrictions: {'country':['AU']},
-                fields: ['place_id','geometry','name']
-            }
-        )
-    }
-</script>
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiTMjB6N6RQXoyTYTij56Ix2oG1mcjU7A&loading=async&libraries=places&callback=initAutocomplete">
-</script>
 {% endif %}
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
 <form action="" method="post">
@@ -38,7 +22,6 @@
 </form>
 
   
-{% endif %}
 <script>
 	let autocomplete;
 	function initAutocomplete(){
