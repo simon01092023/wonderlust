@@ -1,4 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 <h1>HOME</h1>
+<div class="card__content">
+    {% for location in locations %}
+    <div class="location__name">{{ location.name }}</div>
+    <p class="card__text">{{ location.lati }}</p>
+    <p class="card__text">{{ location.longi }}</p>
 
+    {% endfor %}
 {% endblock content %}
