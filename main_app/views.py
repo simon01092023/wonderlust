@@ -5,6 +5,7 @@ import os
 from django.shortcuts import render, redirect
 from .models import PostCard, Location, Photo
 
+
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
@@ -109,3 +110,4 @@ class LocationDetail(DetailView):
 class LocationCreate(CreateView):
     model = Location
     fields = '__all__'
+
