@@ -74,7 +74,11 @@ class PostCardDelete(LoginRequiredMixin, DeleteView):
 
 def home(request):
     # Include an .html file extension - unlike when rendering EJS templates
-    return render(request, 'home.html')
+    locations = Location.objects.all()
+    
+    return render(request, 'home.html',{
+        'locations': locations
+    })
 
 
 def about(request):
