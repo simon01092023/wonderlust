@@ -35,8 +35,8 @@
 		)
 		autocomplete.addListener('place_changed', function(){
 			const place = autocomplete.getPlace();
-			document.getElementById('id_name').value = place.geometry.location.lat();
-			document.getElementById('id_zipcode').value = place.geometry.location.lng();
+			document.getElementById('id_lati').value = place.geometry.location.lat();
+			document.getElementById('id_longi').value = place.geometry.location.lng();
 			console.log(place)
 		
 		})
