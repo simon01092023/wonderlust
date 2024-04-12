@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,6 +10,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiOrsJHFmIrXJk9SEsx4d2Ts6Q_ibncu8"
+      async
+      defer
+    ></script>
   </head>
   <body>
     <header class="navbar-fixed">
@@ -20,9 +28,26 @@
             </li>
           </ul>
           <ul class="right">
+            {% if user.is_authenticated %}
+
             <li><a href="/about">About!!!!</a></li>
+            <li><a href="{% url 'locations_create' %}">Add a Location</a></li>
+            <li><a href="{% url 'location_index' %}">View All Locations</a></li>
+
             <li><a href="{% url 'postcards_create' %}">Add a PostCard</a></li>
-            <li><a href="/postcards">View All My Postcards</a></li>
+
+            <li><a href="{% url 'index' %}">View All My PostCards</a></li>
+            <li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn">logout</button>
+              </form>
+            </li>
+            {% else %}
+            <li><a href="{% url 'login' %}">login</a></li>
+            <li><a href="{% url 'signup' %}">signup</a></li>
+            <li><a href="/about">About!</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>

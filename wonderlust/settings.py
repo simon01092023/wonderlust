@@ -18,6 +18,13 @@ environ.Env()
 environ.Env.read_env()
 
 
+
+import environ
+
+environ.Env()
+environ.Env.read_env()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -131,5 +138,8 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
+# Add this variable to specify where a successful login redirects to
+LOGIN_REDIRECT_URL = '/postcards/'
+LOGOUT_REDIRECT_URL = '/'
+GOOGLE_MAPS_API_KEY = 'AIzaSyBiOrsJHFmIrXJk9SEsx4d2Ts6Q_ibncu8'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
