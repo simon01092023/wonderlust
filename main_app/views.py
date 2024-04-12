@@ -4,8 +4,6 @@ import boto3
 import os
 from django.shortcuts import render, redirect
 from .models import PostCard, Location, Photo
-
-
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
@@ -35,6 +33,7 @@ def signup(request):
 		'error_message': error_message,
 		'form': form
 	})
+
 
 def add_photo(request, postcard_id):
     # photo-file will be the "name" attribute on the <input type="file">
@@ -71,7 +70,6 @@ class PostCardUpdate(LoginRequiredMixin, UpdateView):
 class PostCardDelete(LoginRequiredMixin, DeleteView):
   model = PostCard
   success_url = '/postcards'
-
 
 
 def home(request):

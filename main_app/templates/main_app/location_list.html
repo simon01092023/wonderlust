@@ -1,4 +1,44 @@
-{% extends 'base.html' %}
+Below is the modified code snippet that includes the click event listener: HTML
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map</title>
+    <!-- Load the Google Maps API asynchronously -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiOrsJHFmIrXJk9SEsx4d2Ts6Q_ibncu8&callback=initMap"
+      async
+      defer
+    ></script>
+  </head>
+  <body>
+    <div id="map" style="height: 400px"></div>
+    <script>
+      let map;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 0, lng: 0 },
+          zoom: 3,
+        });
+
+        // Add a click event listener to the map
+        map.addListener("click", function (event) {
+          // Create a marker at the clicked location
+          new google.maps.Marker({
+            position: event.latLng,
+            map: map,
+            title: "Clicked Location",
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<!-- {% extends 'base.html' %}
 {% block content %}
 
 <h1>Location List</h1>
@@ -12,14 +52,11 @@ object_list -->
 object_list -->
 
 {% for location in location_list %}
-  <a href="{% url 'locations_detail' location.id %}">
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">{{ location.name }}</span>
-            
-        </div>
+<a href="{% url 'locations_detail' location.id %}">
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ location.name }}</span>
     </div>
-  </a>
-{% endfor %}
-
-{% endblock %}
+  </div>
+</a>
+{% endfor %} {% endblock %} -->
