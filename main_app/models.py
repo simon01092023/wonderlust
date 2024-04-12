@@ -32,7 +32,7 @@ class PostCard(models.Model):
     title = models.CharField(max_length=100,)
     date = models.DateField(("PostDate"), auto_now=False, auto_now_add=False)
     content = models.TextField(max_length=250)
-    locations = models.ManyToManyField(Location)
+    locations = models.ManyToManyField(Location) 
 
     # 1 user has many PostCards
     user = models.ForeignKey(User, on_delete=models.CASCADE)

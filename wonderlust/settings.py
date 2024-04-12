@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
+
+environ.Env()
+environ.Env.read_env()
+
 
 
 import environ
@@ -110,6 +116,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
+
+GOOGLE_API_KEY=os.environ['GOOGLE_API_KEY']
+
+
+
 
 LANGUAGE_CODE = 'en-us'
 
