@@ -4,7 +4,6 @@ import boto3
 import os
 from django.shortcuts import render, redirect
 from .models import PostCard, Location, Photo
-
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
@@ -34,6 +33,7 @@ def signup(request):
 		'error_message': error_message,
 		'form': form
 	})
+
 
 def add_photo(request, postcard_id):
     # photo-file will be the "name" attribute on the <input type="file">
@@ -72,7 +72,6 @@ class PostCardDelete(LoginRequiredMixin, DeleteView):
   success_url = '/postcards'
 
 
-
 def home(request):
     # Include an .html file extension - unlike when rendering EJS templates
     return render(request, 'home.html')
@@ -109,3 +108,4 @@ class LocationDetail(DetailView):
 class LocationCreate(CreateView):
     model = Location
     fields = '__all__'
+
