@@ -7,17 +7,13 @@ from django_google_maps import fields as map_fields
 
 class Location(models.Model):
     name = models.CharField(max_length=100)
-    zipcode = models.CharField(max_length=200, blank=True, null=True)
-    city = models.CharField(max_length=200, blank=True, null=True)
-    country = models.CharField(max_length=200, blank=True, null=True)
-    address = models.CharField(max_length=200, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    edited_at = models.DateTimeField(auto_now=True)
-    # latitude = models.FloatField(validators=[MinValueValidator(-90),MaxValueValidator(90)])
-    # longitude = models.FloatField(validators=[MinValueValidator(-180),MaxValueValidator(180)])
+    lati = models.FloatField(default=0.0,validators=[MinValueValidator(-90),MaxValueValidator(90)])
+    longi = models.FloatField(default=0.0,validators=[MinValueValidator(-180),MaxValueValidator(180)])
 
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse("locations_detail", kwargs={"pk": self.id})
 
 
 class Map(models.Model):
