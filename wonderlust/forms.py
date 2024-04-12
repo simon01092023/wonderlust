@@ -7,3 +7,13 @@
 # 		# this is straight from the docs
 # 		model = PostCard
 # 		fields = ['date', 'meal']
+
+
+from django import forms
+from .models import Map
+
+
+class MapForm(forms.ModelForm):
+    class Meta:
+        model = Map
+        fields = ['address', 'geolocation']
