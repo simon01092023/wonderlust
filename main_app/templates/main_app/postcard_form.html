@@ -1,4 +1,11 @@
-{% extends 'base.html' %} {% block content %} {% if object %}
+{% extends 'base.html' %} 
+{% load static %}
+{% block postcard_form_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'static/postcard_form.css' %}">
+{% endblock %}
+
+
+{% block content %} {% if object %}
 <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
 {% else %}
 <h1>Add PostCard</h1>
