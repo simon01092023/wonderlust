@@ -13,36 +13,35 @@
   </head>
   <body>
     <div id="map" style="height: 400px"></div>
-    <script type='text/javascript'>
+    <script type="text/javascript">
       let map;
 
       function initMap() {
         const myLatLng = { lat: -25.363, lng: 131.044 }
-        l={{ locations }}
-        console.log(l[1])
-       
+        let array ={{ locations | safe }}
+        console.log(array[1])
+      }
 
 
-        var positions = l.map(location=>{
-            return {location.lati,location.longi}
-        })
-        console.log(positions)
+        // var positions = l.map(location=>{
+        //     return {lat:location.lati,lng:location.longi}
+        // })
+        // console.log(positions)
 
-        var firstLocation = positions[0]
+        // var firstLocation = positions[0]
 
-        map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: myLatLng.lat, lng: myLatLng.lng },
-          zoom: 4,
-        });
-        positions.forEach(position => {
-            new google.maps.Marker({
-              position: position,
-              map,
-              title: "Marker"
-            });
-          });
-        }
-    
+        // map = new google.maps.Map(document.getElementById("map"), {
+        //   center: { lat: myLatLng.lat, lng: myLatLng.lng },
+        //   zoom: 4,
+        // });
+        // positions.forEach(position => {
+        //     new google.maps.Marker({
+        //       position: position,
+        //       map,
+        //       title: "Marker"
+        //     });
+        //   });
+        // }
     </script>
   </body>
 </html>
