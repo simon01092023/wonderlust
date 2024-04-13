@@ -77,7 +77,7 @@ def home(request):
     locations = Location.objects.all()
     
     return render(request, 'home.html',{
-        'locations': locations
+        'locations': list(locations.values())
     })
 
 
