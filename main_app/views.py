@@ -55,16 +55,26 @@ def add_photo(request, postcard_id):
             print(e)
     return redirect('detail', postcard_id=postcard_id)
 
+def disassoc_location(request, postcard_id, location_id):
+	postcard = PostCard.objects.get(id=postcard_id)
+	postcard.locations.remove(location_id)
+	return redirect('detail',postcard_id=postcard_id)
 
+# cats/<int:cat_id>/assoc_toy/<int:toy_id>/
+def assoc_location(request, postcard_id, location_id):
+	print(postcard_id, location_id )
+	postcard = PostCard.objects.get(id=postcard_id)
+	PostCard.locations.add(location_id)# adding a row to our through table the one with 2 foriegn keys in sql
+	return redirect('detail', postcard_id=postcard_id)
 
 class PostCardCreate(LoginRequiredMixin, CreateView):
   model = PostCard
-  fields = ['title', 'date', 'content', 'locations']
+  fields = ['title', 'date', 'content']
 
 class PostCardUpdate(LoginRequiredMixin, UpdateView):
   model = PostCard
   # Let's disallow the renaming of a cat by excluding the name field!
-  fields = ['title', 'date', 'content', 'locations']
+  fields = ['title', 'date', 'content']
   
 
 class PostCardDelete(LoginRequiredMixin, DeleteView):
@@ -95,7 +105,15 @@ def postcards_index(request):
 # decorator function, the function called before detail page 
 def postcards_detail(request, postcard_id):
   postcard = PostCard.objects.get(id=postcard_id)
-  return render(request, 'postcards/detail.html', { 'postcard': postcard })
+  ##get the location postcaerd do not have
+  id_list = postcard.locations.all().values_list('id')
+  ##using exclude to query id not in list
+  locations_postcard_doesnt_have = Location.objects.exclude(id__in=id_list)
+
+
+  return render(request, 'postcards/detail.html', { 
+       'postcard': postcard,
+        'locations': locations_postcard_doesnt_have })
 
 
 def assoc_location(request, postcard_id, location_id):
