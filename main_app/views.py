@@ -69,7 +69,7 @@ def assoc_location(request, postcard_id, location_id):
 
 class PostCardCreate(LoginRequiredMixin, CreateView):
   model = PostCard
-  fields = ['title', 'date', 'content']
+  fields = ['title', 'date', 'content','user']
 
 class PostCardUpdate(LoginRequiredMixin, UpdateView):
   model = PostCard
