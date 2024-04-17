@@ -26,11 +26,18 @@ Wonderlust a travel-focused web application that allows users to create, manage,
 - GOOGLE_MAPS_API_KEY=yourgooglemapaipkeygoeshere (If you want to use Google Maps and the markers)
 
 <p>
-  <img src="https://imgur.com/ZpjGyA9" width="350" title="SeiRocks!">
-  <img src="https://imgur.com/a/mN1KZYX" width="350" title="SeiStillRocks!">
+ <img src="https://imgur.com/ZpjGyA9" width="350" title="SeiRocks!">
+ <img src="https://imgur.com/a/mN1KZYX" width="350" title="SeiStillRocks!">
+ ![SeiRocks!](https://imgur.com/ZpjGyA9/)
+![SeiStillRocks!](https://imgur.com/a/mN1KZYX/)
+
 </p>
 
 ## Getting Started
+
+#### [SEI Rocks! ]<https://imgur.com/ZpjGyA9/>
+
+#### [SEI Still Rocks!]<https://imgur.com/a/mN1KZYX/>
 
 #### 🌎✈️📸 [App Link ]<https://wonderlust-o8kk.onrender.com>
 
