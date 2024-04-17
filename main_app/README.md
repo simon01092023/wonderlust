@@ -26,7 +26,8 @@ Wonderlust a travel-focused web application that allows users to create, manage,
 - GOOGLE_MAPS_API_KEY=yourgooglemapaipkeygoeshere (If you want to use Google Maps and the markers)
 
 <p>
-  <img src="" width="350" title="SeiRocks!">
+  <img src="https://imgur.com/ZpjGyA9" width="350" title="SeiRocks!">
+  <img src="https://imgur.com/a/mN1KZYX" width="350" title="SeiStillRocks!">
 </p>
 
 ## Getting Started
