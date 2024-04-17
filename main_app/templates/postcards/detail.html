@@ -1,82 +1,156 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>{{user}} PostCard Details</h1>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="card">
+
+
+<body>
+  <title>Postcard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .postcard {
+      display: flex;
+      max-width: 600px;
+      background-color: #fff;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px; 
+    }
+    .postcard img {
+      width: 300px;
+      height: auto;
+      object-fit: cover;
+    }
+    .address-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: auto;
+      margin-top: 0px;
+      padding-right: 10px; /* Added padding for better spacing */
+    }
+    .address {
+      text-align: right;
+    }
+    .content {
+      text-align: right;
+    
+    }
+    .card-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+    }
+    .edit-link, .delete-link {
+      display: inline-block;
+      padding: 5px 10px;
+      margin-right: 10px;
+      color: #007bff;
+      text-decoration: none;
+      border: 1px solid #007bff;
+      border-radius: 3px;
+      transition: background-color 0.3s ease;
+    }
   
-  <div class="card-content">
-    <span class="card-title">{{ postcard.title }}</span>
-    <p>Date: {{ postcard.date }}</p>
-    <p>Content: {{ postcard.content|linebreaks }}</p>
-    <p>Location: {{ postcard.locations|linebreaks }}</p>
-    <div class="card-action">
-        <a href="{% url 'postcards_update' postcard.id %}">Edit</a>
-        <a href="{% url 'postcards_delete' postcard.id %}">Delete</a>
-      </div>
-  </div>
-  {% for photo in postcard.photo_set.all %}
-  <img class="responsive-img card-panel" src="{{photo.url}}">
-{% empty %}
-  <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-{% endfor %}
-
-<form action="{% url 'add_photo' postcard.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-    {% csrf_token %}
-    <input type="file" name="photo-file">
-    <br><br>
-    <button type="submit" class="btn">Upload Photo</button>
-</form>
-</div>
-
-    <hr>
-    <div class="row">
-      <div class="col s6">
+    .edit-link:hover, .delete-link:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
 
 
-        <h3>{{ postcard.title }}'s locations</h3>
-        {% if postcard.locations.count %}
+  </style>
+  </head>
+  <body>
+  
+    <div class="postcard">
+      <img src="{{postcard.photo_set.first.url}}" alt="Postcard Image">
+      <div class="address-content">
+        <div class="address">
+          
+          <p>From: {{ user }}</p>
+          <p>{{ postcard.date }}</p>
           {% for location in postcard.locations.all %}
-            <div class="card">
-              <div class="card-content">
-                <span class="card-title">
-                    {{ location.name }}
-                </span>
-                <form action="{% url 'disassoc_location' postcard.id location.id %}" method="POST">
-                  {% csrf_token %}
-                  <button type="submit" class="btn">Remove</button>
-                </form>
-
-              </div>
-            </div>
+          <p>{{ location.name}}</p>
           {% endfor %}
-        {% else %}
-          <h5>No locations </h5>
-        {% endif %}
+        </div>
+        <div class="content">
+          
+          <p>{{ postcard.content }}</p>
+        </div>
       </div>
-      <div class="col s6">
-        <h3>Available Locations</h3>
-        {% if locations.count %}
-        {% for location in locations.all %}
-        <div class="card">
-          <div class="card-content">
-            
+      
+    </div>
+    
+    <a href="{% url 'postcards_update' postcard.id %}" class="edit-link">Edit</a>
+    <a href="{% url 'postcards_delete' postcard.id %}" class="delete-link">Delete</a>
+    
+  <div class="row">
+
+      {% if postcard.locations.count %}
+        {% for location in postcard.locations.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">{{ location.name }}</span>
+              <form action="{% url 'disassoc_location' postcard.id location.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Remove</button>
+              </form>
+            </div>
           </div>
+        {% endfor %}
+      {% else %}
+        <h5>No locations</h5>
+      {% endif %}
+
+
+  
+      {% for location in locations.all %}
+        <div class="card">
           <div class="card-action">
+            {{ location.name }}
             <form action="{% url 'assoc_location' postcard.id location.id %}" method="POST">
               {% csrf_token %}
               <button type="submit" class="btn">Add</button>
             </form>
-    
           </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <h5>{{postcard.name}} Already Has All Locations Available</h5>
-        {% endif %}
-      </div>
-
-      
-    </div>
+      {% endfor %}
     
+    <div class="card-panel">
+      <form action="{% url 'add_photo' postcard.id %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <br><br>
+        <button type="submit" class="btn">Upload Photo</button>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        {% for photo in postcard.photo_set.all %}
+          <img class="responsive-img card-panel" src="{{ photo.url }}">
+        {% empty %}
+          <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+
+
+  
+
 {% endblock %}

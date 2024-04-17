@@ -31,7 +31,9 @@ SECRET_KEY = 'django-insecure-#zs&zk=3@3@b5mx8qn@a!)d%hpa8(f-)rl853!$gjsj43uqc=y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wonderlust-o8kk.onrender.com', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = ['wonderlust-o8kk.onrender.com', 'localhost','127.0.0.1']
+
 
 
 # Application definition
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'materializecssform',
 ]
 
 MIDDLEWARE = [
