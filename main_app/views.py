@@ -128,9 +128,12 @@ def postcards_detail(request, postcard_id):
     # using exclude to query id not in list
     locations_postcard_doesnt_have = Location.objects.exclude(id__in=id_list)
 
+
     return render(request, 'postcards/detail.html', {
         'postcard': postcard,
-        'locations': locations_postcard_doesnt_have})
+        'locations': locations_postcard_doesnt_have,
+        
+        })
 
 
 def assoc_location(request, postcard_id, location_id):

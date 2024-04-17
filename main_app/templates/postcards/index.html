@@ -2,15 +2,15 @@
 {% block content %}
 
 
-    <h1>Postcards List</h1>
+<h1>Hi {{user}}, welcome to your PostCards Library</h1>
     <ul class="cards">
    
         {% for postcard in postcards %}
         <li class="cards__item">
             <div class="card">
                
-
-                <div class="card__image card__image--fence" style="background-image: url('{{ postcard.image_url }}');"></div>
+                <img class="responsive-img card-panel fixed-height-img" src="{{postcard.photo_set.first.url}}">
+             
                 <div class="card__content">
                     <div class="card__title">{{ postcard.title }}</div>
                     <p class="card__text">{{ postcard.content|truncatechars:150 }}</p>
@@ -22,6 +22,12 @@
         {% endfor %}
     </ul>
 </div>
+<style>
+    .fixed-height-img {
+        height: 200px; /* Adjust the height as needed */
+        object-fit: cover; /* Ensure the image covers the specified height */
+    }
+</style>
 
 {% endblock %}
 

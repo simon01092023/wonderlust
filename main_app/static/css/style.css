@@ -141,3 +141,21 @@ img {
   line-height: 1.5;
   margin-bottom: 1.25rem;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  min-height: calc(100% - 64px); /* Adjust 64px to match your header height */
+  padding-bottom: 50px; /* Adjust as needed to ensure footer visibility */
+}
+
+footer.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa; /* Example background color */
+  padding: 10px 0;
+  flex-shrink: 0; /* Prevent footer from shrinking */
+}
